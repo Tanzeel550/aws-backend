@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euxo pipefail
+exec > >(tee /var/log/user-data.log) 2>&1
+
+sudo dnf update -y
+sudo dnf install git -y
+
+git clone https://github.com/Tanzeel550/aws-backend.git
+cd aws-backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt
+
+export DB_HOST="database-1.cni0m44os2nx.eu-north-1.rds.amazonaws.com"
+export DB_PORT="3306"
+export DB_NAME="django_app_db"
+export DB_USER="admin"
+export DB_PASSWORD="L2%~AX_Jf-=HXjb"
+
+python3 manage.py makemigrations users prediction
+python3 manage.py migrate
+python3 manage.py runserver 0.0.0.0:8000
