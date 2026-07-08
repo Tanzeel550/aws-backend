@@ -8,6 +8,7 @@ def health_check(request):
     return JsonResponse({"status": "healthy"}, status=200)
 
 urlpatterns = [
+    path('', health_check, name='root_health_check'),
     path('admin/', admin.site.urls),
     path('health/', health_check, name='health_check'),
     path('api/users/', include('users.urls')),

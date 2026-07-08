@@ -4,7 +4,7 @@ env:
   variables:
     AWS_ACCOUNT_ID: "455540676747"
     AWS_REGION: "eu-north-1"
-    REPOSITORY_NAME: "narkina-repo"
+    REPOSITORY_NAME: "narkina-ecr-repo"
     CONTAINER_NAME: "narkina-backend"
 
 phases:
